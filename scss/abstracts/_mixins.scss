@@ -1,0 +1,53 @@
+@mixin clearFix {
+  &::after {
+    content: '';
+    clear: both;
+    display: table;
+  }
+}
+
+@mixin absCenter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+}
+
+
+// MEDIA QUERIES MANAGEMENT SYSTEM
+/*
+Sizes and media queries argument
+0px - 600px - Phone
+600px - 900px - Tablet Portrait / tab-port
+900px - 1200px - Tablet Landscape / tab-land
+1200px - 1800px - Initial design / ---------
+1801px - infinity - Big Desktop / big-desktop
+
+ORDER: base > typography > general layout + grid > page layout > components
+*/
+
+@mixin respond($device) {
+  @if ($device == phone) {
+    @media (max-width: 37.5em) {  //600px
+      @content;
+    }
+  }
+
+  @if ($device == tab-port) {
+    @media (max-width: 56.25em) { //900px
+      @content;
+    }
+  }
+
+  @if ($device == tab-land) {
+    @media (max-width: 75em) { //1200px
+      @content;
+    }
+  }
+
+  @if ($device == big-desktop) {
+    @media (min-width: 112.5em) {
+      @content;
+    }
+  }
+}
